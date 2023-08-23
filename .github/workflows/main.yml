@@ -1,8 +1,6 @@
 name: Push Build to Artifactory
 
-
 on: [push]
-
 
 jobs:
  build:
@@ -19,12 +17,6 @@ jobs:
      env:
        JF_URL: ${{ secrets.ARTIFACTORY_URL }}
        JF_ACCESS_TOKEN: ${{ secrets.ARTIFACTORY_ACCESS_TOKEN }}
-
-
-   # This command adds a new server configuration to the JFrog CLI   
-   - run: |
-       export SERVER_ID="test"
-       jf c add $SERVER_ID --url=$URL --access-token=$ACCESS_TOKEN --interactive=false
 
 
    # This action creates a new test file and uploads it to Artifactory   
