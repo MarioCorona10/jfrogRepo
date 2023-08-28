@@ -27,6 +27,7 @@ jobs:
        # JFrog Platform access token
        #JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN }}
    - run: |
-       jf rt ping
+       jfrog config add artifactory-server --artifactory-url="$JF_URL" --user="$JF_USER" --password="$JF_PASSWORD" --interactive=false
+
    
   
