@@ -27,7 +27,8 @@ jobs:
        # JFrog Platform access token
        #JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN }}
    - run: |
-       jfrog config add artifactory-server --artifactory-url="$JF_URL" --user="$JF_USER" --password="$JF_PASSWORD" --interactive=false
+       jfrog config add artifactory-server --url="$JF_URL" --user="$JF_USER" --password="$JF_PASSWORD" --interactive=false
+
 
    
   
