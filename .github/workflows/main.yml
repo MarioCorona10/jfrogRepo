@@ -13,37 +13,20 @@ jobs:
    - name: Checkout Code
      uses: actions/checkout@v2
 
+   - uses: jfrog/setup-jfrog-cli@v3
+   - run: jf --version
 
-   # This action sets up the JFrog CLI with the Artifactory URL and access token     
    - uses: jfrog/setup-jfrog-cli@v3
      env:
-       JF_URL: ${{ secrets.ARTIFACTORY_URL }}
-       JF_ACCESS_TOKEN: ${{ secrets.ARTIFACTORY_ACCESS_TOKEN }}
-
-
-   # This command adds a new server configuration to the JFrog CLI   
+    # JFrog platform url (for example: https://acme.jfrog.io) 
+       JF_URL: ${{ secrets.JF_URL }}
+    
+    # Basic authentication credentials
+       JF_USER: ${{ secrets.JF_USER }}
+       JF_PASSWORD: ${{ secrets.JF_PASSWORD }}
+       # JFrog Platform access token
+       #JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN }}
    - run: |
-       export SERVER_ID="test"
-       jf c add $SERVER_ID --url="http://localhost:8082" --user="admin" --password="Mario1028:)" --interactive=false --enc-password=true
-
-
-   # This action creates a new test file and uploads it to Artifactory   
-   - name: Push Build to Artifactory
-     run: |
-       echo "test file " > test.txt
-       export BUILD_NAME="my-build"
-       export BUILD_MODULE="my-module"
-       export BUILD_NUMBER="1"
-
-
-       export PATH_TO_DIRECTORY="name/version/dates"
-      
-       jf rt upload "test.txt" example-repo-local/$PATH_TO_DIRECTORY --build-name $BUILD_NAME --build-number $BUILD_NUMBER --module $BUILD_MODULE
-
-
-   # This action publishes the build information to Artifactory and deletes older builds
-   - name: Build to Artifactory
-     run: |
-       jf rt build-publish $BUILD_NAME $BUILD_NUMBER
-     
-       jf rt bdi c --max-builds=1
+       jf rt ping
+   
+  
