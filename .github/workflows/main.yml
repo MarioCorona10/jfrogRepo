@@ -49,6 +49,6 @@ jobs:
 
       - name: Upload to jfrog
         run: |
-         jf rt dl artifacts/
-         jf rt u aether artifacts/
+         jf rt dl Gitrepo/
+         jf rt u "**/DotNetDocker.dll" Gitrepo/
          jf rt bp
