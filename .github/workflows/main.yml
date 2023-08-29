@@ -52,7 +52,7 @@ jobs:
          jfrog config add artifactory-server --url="$JF_URL" --user="$JF_USER" --password="$JF_PASSWORD" --interactive=false
 
       - name: Upload to jfrog
-      - run: |
+        run: |
          jf rt dl artifacts/
          jf rt u aether artifacts/
          jf rt bp
